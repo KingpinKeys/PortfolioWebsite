@@ -14,7 +14,124 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     />
+    <script>
+              var slideIndex = 1;
+  document.addEventListener("DOMContentLoaded", function() {
+    // Automatically click on the default open tab
+    document.getElementById("defaultOpen").click();
+
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the button that opens the modal
+    var btn = document.querySelector(".project-content button");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal 
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    // Add event listeners to UI project buttons to open the modal with corresponding images
+    document.getElementById("btnProject1").addEventListener("click", function() {
+        openModal(1);
+    });
+    document.getElementById("btnProject2").addEventListener("click", function() {
+        openModal(2);
+    });
+    document.getElementById("btnProject3").addEventListener("click", function() {
+        openModal(3);
+    });
+
+    // Add event listeners to tab links
+    var tabLinks = document.getElementsByClassName("tablinks");
+    for (var i = 0; i < tabLinks.length; i++) {
+        tabLinks[i].addEventListener("click", function(event) {
+            openTab(event, this.id);
+        });
+    }
+});
+
+
+
+// Function to open a specific tab
+function openTab(evt, tabName) {
+    var i, tabcontent, tablinks;
+
+    // Hide all tab content
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    // Remove the "active" class from all tab links
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    // Show the specific tab content and mark the button as active
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+
+
+
+
+  </script>
+  
+</head>
     <style>
+
+Track */
+::-webkit-scrollbar-track {
+  background: #395b64;; /* Color of the track */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #4da3a4; /* Color of the handle */
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #3b8081; /* Color of the handle on hover */
+}
+
+
+/* Custom scrollbar for Firefox */
+/* Works in Firefox */
+
+/* Track */
+body {
+  scrollbar-color: #4da3a4 #395b64;; /* Color of the handle and the track */
+}
+
+/* Handle */
+body::-webkit-scrollbar-thumb {
+  background: #4da3a4; /* Color of the handle */
+}
+
+/* Handle on hover */
+body::-webkit-scrollbar-thumb:hover {
+  background: #3b8081; /* Color of the handle on hover */
+}
+
+
       body {
         font-family: Arial, sans-serif;
         margin: 0;
@@ -99,6 +216,76 @@
         font-size: 17px;
         text-transform: none;
       }
+
+      /* Adjustments for the tab content galleries */
+.ui-project {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.ui-project .ui-content {
+  margin: 20px;
+}
+
+
+.scroll-container img {
+  max-width: calc(33% - 20px); /* Adjust the width of the images */
+  max-height: 250px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  transition: transform 0.3s ease; /* Add a smooth transition on hover */
+}
+
+.scroll-container img:hover {
+  transform: scale(1.05); /* Scale up the image on hover */
+}
+
+      div.scroll-container {
+  background-color: #2c3333;
+  overflow: auto;
+  white-space: nowrap;
+  padding: 10px;
+}
+
+div.scroll-container img {
+  padding: 10px;
+}
+      .tab{
+        display:flex;
+        justify-content: center;
+      }
+
+      .tab button {
+  background-color: #4da3a4; 
+  color: #fff; 
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 12px 20px;
+  transition: background-color 0.3s; /* Smooth transition on hover */
+  border-radius: 8px 8px 0 0; /* Rounded corners */
+  font-family: "Montserrat", sans-serif; /* Use Montserrat font */
+  margin: 4px;
+}
+
+/* Change button background color on hover */
+.tab button:hover {
+  background-color: #3b8081; /* Darker shade */
+}
+
+/* Set active tab button style */
+.tab button.active {
+  background-color: #395b64; /* Darker shade for active tab */
+}
+
+
+/* Clear floats after the buttons */
+.tab::after {
+  content: "";
+  clear: both;
+  display: table;
+}
       .container h2 {
         font-size: 1.3em;
       }
@@ -124,7 +311,8 @@
         text-decoration: none;
         font-size: 25px !important;
       }
-      .project {
+      .project,
+      .ui-project {
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -145,6 +333,12 @@
         max-height: 250px;
         order: 1;
       }
+
+      .ui-project img {
+        max-width: 100%;
+        max-height: 400px;
+        order: 1;
+      }
       .project-content {
         flex: 1;
         text-align: center;
@@ -153,7 +347,7 @@
         font-family: "Montserrat", sans-serif;
         letter-spacing: 1px;
         text-transform: none;
-        max-width: 52em;
+        max-width: 50%;
         font-size: 16px;
         width: 10em;
         left: 3em;
@@ -205,7 +399,7 @@
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 16px; 
         border-radius: 50px;
         text-transform: uppercase;
         margin-top: 20px;
@@ -216,7 +410,197 @@
         background-color: white;
         color: #4da3a4;
       }
-    </style>
+
+      /* Modal styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 800px;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Position the image container (needed to position the left and right arrows) */
+.container {
+  position: relative;
+}
+
+/* Hide the images by default */
+.mySlides {
+  display: none;
+}
+
+/* Add a pointer when hovering over the thumbnail images */
+.cursor {
+  cursor: pointer;
+}
+
+/* Next & previous buttons */
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 40%;
+  width: auto;
+  padding: 16px;
+  margin-top: -50px;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* Container for image text */
+.caption-container {
+  text-align: center;
+  background-color: #222;
+  padding: 2px 16px;
+  color: white;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Six columns side by side */
+.column {
+  float: left;
+  width: 16.66%;
+}
+
+/* Add a transparency effect for thumnbail images */
+.demo {
+  opacity: 0.6;
+}
+
+.active,
+.demo:hover {
+  opacity: 1;
+}
+
+.project-content button{
+  color: #4da3a4;
+    border: 2px solid #4da3a4;
+    padding: 7px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 50px;
+    text-transform: uppercase;
+    margin-top: 20px;
+    background-color: none;
+    font-family: "Montserrat", sans-serif;}
+
+  .project-content button :hover{
+        background-color: white;
+        color: #4da3a4;
+      }
+
+      @media only screen and (max-width: 1100px){
+        .project img {
+    max-width: 350px;
+    max-height: 250px;
+    order: 1;
+}
+
+
+      }    
+
+      @media only screen and (max-width: 940px){
+        .project img {
+    max-width: 275px;
+    max-height: 250px;
+    order: 1;
+}
+
+@media only screen and (max-width: 800px){
+
+.project img {
+    display: none;
+}
+
+.project-content {
+    flex: 1;
+    text-align: center;
+    color: #dededf;
+    text-align: center;
+    font-family: "Montserrat", sans-serif;
+    letter-spacing: 1px;
+    text-transform: none;
+    max-width: 100%;
+    font-size: 14px;
+    left: 0%;
+    position: relative;
+}
+
+.project:nth-child(even) .project-content {
+    order: 2;
+    text-align: center;
+    padding-left: 8px;
+    left: 0em; 
+}
+}
+
+      }
+      </style>
   </head>
   <body>
       <div class="container">
@@ -245,8 +629,15 @@
                   Computer Games Application Development degree from Abertay University.
               </p>
           </header>
+          <div class="tab">
+            <button class="tablinks" onclick="openTab(event, 'Programming')" id="defaultOpen">Programming</button>
+            <button class="tablinks" onclick="openTab(event, 'UI')">UI</button>
+            <button class="tablinks" onclick="openTab(event, 'Work')">Work History</button>
+            <button class="tablinks" onclick="openTab(event, 'CV')">CV</button>
+          </div>
           <div class="divider"></div>
 
+          <div id="Programming" class="tabcontent">
           <section class="project">
               <img src="images/pb.png" alt="Project Image" />
               <div class="project-content">
@@ -399,6 +790,74 @@
                   </div>
               </div>
           </section>
+        </div>
+
+        <div id="UI" class="tabcontent">
+            <section class="ui-project">
+            <div class="ui-content">
+                <h2>Mini Crunch</h2>
+                <div class="scroll-container">
+                  <img src="images/mini/Minicrunch-GameplayUI2.gif" width="250" height="400">
+                  <img src="images/mini/Minicrunch-GameplayUI3.gif" width="250" height="400">
+                  <img src="images/mini/image_002_0000.jpg" width="250" height="400">
+                  <img src="images/mini/image_003_0000.jpg" width="250" height="400">
+                  <img src="images/mini/image_005_0000.jpg" width="250" height="400">
+                  <img src="images/mini/image_006_0000.jpg" width="250" height="400">
+                  <img src="images/mini/Minicrunch-shop.gif" width="850" height="400">
+                  <img src="images/mini/image_010_0000.jpg" width="850" height="400">
+                  <img src="images/mini/image_011_0000.jpg" width="850" height="400">
+                  <img src="images/mini/image_012_0000.jpg" width="850" height="400">
+                </div>
+            </div>
+        </section>
+        
+        <section class="ui-project">
+          <div class="ui-content">
+              <h2>The Zhukov Line</h2>
+              <div class="scroll-container">
+                  <img src="images/zhukov/chemicals-zhukov.png" width="600" height="400">
+                  <img src="images/zhukov/dashboard-zhukov.png" width="600" height="400">
+                  <img src="images/zhukov/mainmenu-zhukov.png" width="600" height="400">
+                  <img src="images/zhukov/mainmenu2-zhukov.png" width="600" height="400">
+                  <img src="images/zhukov/GPS-zhukov.png" width="600" height="400">
+                  <img src="images/zhukov/options-zhukov.png" width="600" height="400">
+                  <img src="images/zhukov/pause-zhukov.png" width="600" height="400">
+                  <img src="images/zhukov/sedativemachine-zhukov.png" width="600" height="400">
+                  <img src="images/zhukov/sedativemachine2-zhukov.png" width="600" height="400">
+                  <img src="images/zhukov/terminal1-zhukov.png" width="600" height="400">
+                  <img src="images/zhukov/terminal2-zhukov.png.png" width="600" height="400">
+                  <img src="images/zhukov/terminal3-zhukov.png.png" width="600" height="400">
+
+              </div>
+      </section>
+    
+        <section class="ui-project">
+          <div class="ui-content">
+              <h2>Going Yonder</h2>
+              <div class="scroll-container">
+                <img src="images/yonder/dialogue-yonder.gif" width="700" height="400">
+                <img src="images/yonder/dialogue-yonder.png" width="700" height="400">
+                <img src="images/yonder/mainmenu-yonder.gif" width="700" height="400">
+                <img src="images/yonder/paused-yonder.png" width="700" height="400">
+                <img src="images/yonder/tutorial-prompt.png" width="700" height="400">
+          </div>
+      </section>
+    
+         
+      <section class="ui-project">
+        <div class="ui-content">
+            <h2>Misc. </h2>
+            <div class="scroll-container">
+              <img src="images/before-blur.png" width="450" height="400">
+              <img src="images/shrine-cleared.png" width="600" height="400">
+              <img src="images/Character-sheet.png" width="600" height="400">
+        </div>
+    </section>
+           
+            
+        </div>
+
+        <div id="Work" class="tabcontent">
           <section class="work-experience">
               <h2>Work Experience</h2>
               <h3>Fishtin Games - Cofounder and Programmer</h3>
@@ -413,6 +872,12 @@
               <p>Duration: Feb 2021 - June 2021</p>
              
           </section>
+        </div>
+
+        <div id="CV" class="tabcontent">
+          <iframe src="images/KieranResume.pdf" width="100%" height="1000px"></iframe>
+
+        </div>
       </div>
   </body>
 </html>
